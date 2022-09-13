@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal, StyleSheet, TextInput, View } from "react-native";
+import { Button, Modal, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 
 function TodoCreate({onCreate, visible, onClose}) {
 	const [text, setText] = useState("");
@@ -13,7 +13,10 @@ function TodoCreate({onCreate, visible, onClose}) {
 		setText('');
 	}
 	return ( <Modal visible={visible} animationType="slide" 
-					transparent={true}>
+				onRequestClose={() => onClose()}
+				transparent={true}>
+		<TouchableOpacity onPress={() => onClose()} style={{flex: 1}}>
+		</TouchableOpacity>
 		<View style={styles.inpArea}>
 			<View>
 				<TextInput placeholder='해야할 일' style={styles.writeInp}
@@ -23,31 +26,36 @@ function TodoCreate({onCreate, visible, onClose}) {
 				/>
 			</View>
 			<View style={styles.btnWrap}>
-				<Button title="취소" onPress={onClose}/>
-				<Button title="추가" color="tomato" onPress={pressHandle}/>
+				<View style={{marginRight: 6}}>
+					<Button title="취소" color="#dbdbdb" onPress={onClose}/>
+				</View>
+				<View>
+					<Button title="추가" color="#616161" onPress={pressHandle}/>
+				</View>
 			</View>
 		</View>
 	</Modal> );
 }
 const styles = StyleSheet.create({
 	inpArea: {
-		height: '30%',
+		height: 180,
 		borderTopLeftRadius:32,
 		borderTopRightRadius:32,
 		justifyContent: 'center',
-		marginTop: 'auto',
-		padding: 12,
+		// marginTop: 'auto',
+		padding: 20,
 		backgroundColor: '#fff',
 	},
 	writeInp: {
+		fontSize: 16,
 		marginRight: 8,
-		borderBottomColor: '#ddd',
+		borderBottomColor: '#dbdbdb',
 		borderBottomWidth: 1,
 	},
 	btnWrap: {
 		flexDirection: 'row',
 		justifyContent: "flex-end",
-		marginTop: 8,
+		marginTop: 20,
 	}
 })
 export default TodoCreate;

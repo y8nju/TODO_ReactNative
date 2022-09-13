@@ -42,7 +42,9 @@ export default function App() {
 	}
 	return (
 		<View style={styles.root}>
-			<Button title="할 일" onPress={()=> setModal(true)} />
+			<View style={{marginBottom: 20}}>
+				<Button title="할 일" color="#616161" onPress={()=> setModal(true)} />
+			</View>
 			<TodoCreate onCreate={createHandle} visible={modal} onClose={modalCloseHandle} />	
 			{/* 1. TodoCreate에게 onCreate로 createHandle을 보내준다 */}
 			<FlatList data={todoList} renderItem={(one)=> {
@@ -56,6 +58,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingHorizontal: 16,
 		paddingTop: 48,
-		backgroundColor: '#f1f1f1',
+		backgroundColor: '#e5e5e5',
 	},
 });
